@@ -13,12 +13,6 @@
 // Exit if called directly.
 defined( 'ABSPATH' ) or die( 'Cannot access pages directly.' );
 
-// Load textdomain
-function hypothesis_load_plugin_textdomain() {
-    load_plugin_textdomain( 'hypothesis', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
-}
-add_action( 'plugins_loaded', 'hypothesis_load_plugin_textdomain' );
-
 /**
  * Create settings page (see https://codex.wordpress.org/Creating_Options_Pages)
  */
@@ -142,7 +136,7 @@ class HypothesisModsSettingsPage {
    */
   public function display_section_info() {
   ?>
-    <p><?php esc_attr_e( 'Control additional Hypothesis display settings.', 'hypothesis' ); ?></p>
+    <p><?php printf( 'Control additional Hypothesis display settings.'); ?></p>
   <?php }
 
   /**
@@ -150,6 +144,7 @@ class HypothesisModsSettingsPage {
    */
   public function darken_highlights_callback ( $args ) {
     $val = isset( $this->options['darken-highlights'] ) ? esc_attr( $this->options['darken-highlights'] ) : 0;
+
     printf(
       '<input type="checkbox" id="darken-highlights" name="hypothesis_mods_options[darken-highlights]" value="1" %s/>',
       checked( $val, 1, false )
