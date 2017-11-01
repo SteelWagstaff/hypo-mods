@@ -1,0 +1,11 @@
+.annotator-hl {
+background-color: rgba(255, 255, 60, 0.5);
+}
+
+.annotator-hl .annotator-hl {
+background-color: rgba(206, 206, 60, 0.6);
+}
+
+.annotator-hl .annotator-hl .annotator-hl{
+background-color: rgba(192, 192, 49, 0.7);
+}
