@@ -179,6 +179,7 @@ class HypothesisModsSettingsPage {
 add_action( 'wp', 'hypothesis_mods' );
 
 function hypothesis_mods() {
+$options = get_option( 'wp_hypothesis_options' );
 /**
  * Calls script to resize page upon expansion of Hypothesis annotation pane
  */
