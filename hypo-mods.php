@@ -37,8 +37,8 @@ class HypothesisModsSettingsPage {
 	 */
 	public function add_plugin_page() {
 		add_options_page(
-			__( 'Hypothesis Mods Settings', 'HypothesisModsSettingsPage' ),
-			__( 'Hypothesis Mods', 'hypothesis_mods' ),
+			'Hypothesis Mods Settings Admin',
+			'Hypothesis Mods Settings',
 			'manage_options',
 			'hypothesis-mods-setting-admin',
 			array( $this, 'create_admin_page' )
