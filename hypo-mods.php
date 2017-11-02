@@ -172,19 +172,17 @@ class HypothesisModsSettingsPage {
     );
   }
 }
+
 	if ( is_admin() ) {
 		$hypothesis_mods_settings_page = new HypothesisModsSettingsPage();
+		console.log
 	}
 
 add_action( 'wp', 'hypothesis_mods' );
 
 function hypothesis_mods() {
 	$options = get_option( 'hypothesis_mods_options' );
-	console.log('Is this being called?');
-	console.log($options);
-	console.log('testing' . $this);
-	console.log('Page width value:' . $this->options['adjust-page-width']);
-
+	
 	/**
  	* Calls script to resize page upon expansion of Hypothesis annotation pane
  	*/
