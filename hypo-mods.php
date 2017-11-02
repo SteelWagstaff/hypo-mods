@@ -177,7 +177,7 @@ class HypothesisModsSettingsPage {
 		$hypothesis_mods_settings_page = new HypothesisModsSettingsPage();
 	}
 
-add_action( 'wp', 'hypothesis_mods' );
+add_action( 'wp_enqueue_scripts', 'hypothesis_mods' );
 
 function hypothesis_mods() {
 	$options = get_option( 'hypothesis_mods_options' );
