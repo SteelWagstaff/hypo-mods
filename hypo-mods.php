@@ -107,36 +107,35 @@ class HypothesisModsSettingsPage {
     );
 }
 
-	/**
-	 * Sanitize each setting field as needed
-	 *
-	 * @param array $input Contains all settings fields as array keys.
-	 */
-	public function sanitize( $input ) {
-		$new_input = array();
+/**
+	* Sanitize each setting field as needed
+	*
+	* @param array $input Contains all settings fields as array keys.
+	*/
+ public function sanitize( $input ) {
+	 $new_input = array();
 
-		if ( isset( $input['adjust-page-width'] ) ) {
-			$new_input['adjust-page-width'] = absint( $input['adjust-page-width'] );
-		}
+	 if ( isset( $input['adjust-page-width'] ) ) {
+		 $new_input['adjust-page-width'] = absint( $input['adjust-page-width'] );
+	 }
 
-    if ( isset( $input['darken-highlights'] ) ) {
-      $new_input['darken-highlights'] = absint( $input['darken-highlights'] );
-    }
+	 if ( isset( $input['darken-highlights'] ) ) {
+		 $new_input['darken-highlights'] = absint( $input['darken-highlights'] );
+	 }
 
-    if ( isset( $input['hide-annotation-header'] ) ) {
-			$new_input['hide-annotation-header'] = absint( $input['hide-annotation-header'] );
-		}
+	 if ( isset( $input['hide-annotation-header'] ) ) {
+		 $new_input['hide-annotation-header'] = absint( $input['hide-annotation-header'] );
+	 }
 
-		return $new_input;
-	}
+	 return $new_input;
+ }
 
   /**
    * Print the Display Settings section text
    */
   public function print_section_info() {
-  ?>
-    <p><?php printf( 'Control additional Hypothesis display settings.'); ?></p>
-  <?php }
+  	printf( 'Control additional Hypothesis display settings.');
+	}
 
 	/**
 	 * Callback for 'adjust-page-width'.
@@ -173,14 +172,19 @@ class HypothesisModsSettingsPage {
     );
   }
 }
+	if ( is_admin() ) {
+		$hypothesis_mods_settings_page = new HypothesisModsSettingsPage();
+	}
 
+add_action( 'wp', 'hypothesis_mods' );
+
+function hypothesis_mods() {
 /**
  * Calls script to resize page upon expansion of Hypothesis annotation pane
  */
  if ( isset ( $options['adjust-page-width'] ) ) {
 		 wp_enqueue_script( 'resize', plugins_url('/js/resize.js', __FILE__), array('jquery'), false, true );
   }
-}
   /**
    * Loads CSS which hides annotation header
    */
@@ -188,7 +192,6 @@ class HypothesisModsSettingsPage {
   if ( isset( $options['hide-annotation-header'] ) ) {
     wp_enqueue_style( 'hypo', plugins_url( '/css/hypo.css', __FILE__) );
   }
-}
 
 /**
  * Loads CSS which darkens annotations to make more visible
@@ -196,8 +199,4 @@ class HypothesisModsSettingsPage {
   if (isset ($options['darken_highlights'] ) ) {
     wp_enqueue_style( 'darken', plugins_url( 'css/darken.css', __FILE__) );
   }
-}
-
-if ( is_admin() ) {
-	$hypothesis_mods_settings_page = new HypothesisModsSettingsPage();
 }
