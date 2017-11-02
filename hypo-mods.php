@@ -180,6 +180,7 @@ add_action( 'wp', 'hypothesis_mods' );
 
 function hypothesis_mods() {
 $options = get_option( 'hypothesis_mods_options' );
+console.log($options);
 /**
  * Calls script to resize page upon expansion of Hypothesis annotation pane
  */
