@@ -73,18 +73,26 @@ class HypothesisModsSettingsPage {
 		);
 
 		/**
-		 * Hypothesis Settings
+		 * Hypothesis Mod Settings
 		 */
 		add_settings_section(
-			'hypothesis_settings_section', // ID.
-			__( 'Hypothesis Settings', 'hypothesis_mods' ), // Title.
-			array( $this, 'settings_section_info' ), // Callback.
+			'hypothesis_mods_settings_section', // ID.
+			'Hypothesis Mod Settings', // Title.
+			array( $this, 'print_section_info' ), // Callback.
 			'hypothesis-mods-setting-admin' // Page.
 		);
 
 		add_settings_field(
+			'adjust-page-width',
+			'Adjust the width of the page when annotation pane is expanded',
+			array( $this, 'adjust_page_width_callback' ),
+			'hypothesis-mods-setting-admin',
+			'hypothesis_mods_settings_section'
+		);
+
+		add_settings_field(
 			'darken-highlights',
-			__( 'Darken highlights (to make more visible)', 'hypothesis_mods' ),
+			'Darken highlights (to make more visible)',
 			array( $this, 'darken_highlights_callback' ),
 			'hypothesis-mods-setting-admin',
 			'hypothesis_mods_settings_section'
@@ -97,19 +105,7 @@ class HypothesisModsSettingsPage {
       'hypothesis-mods-setting-admin',
 			'hypothesis_mods_settings_section'
     );
-
-	/**
-   * display Settings
-   */
-  add_settings_section(
-    'hypothesis_display_section', // ID.
-    __( 'Display Settings', 'hypothesis' ), // Title.
-    array( $this, 'display_section_info' ), // Callback.
-    'hypothesis-setting-admin' // Page.
-  );
-
 }
-
 
 	/**
 	 * Sanitize each setting field as needed
@@ -119,10 +115,13 @@ class HypothesisModsSettingsPage {
 	public function sanitize( $input ) {
 		$new_input = array();
 
+		if ( isset( $input['adjust-page-width'] ) ) {
+			$new_input['adjust-page-width'] = absint( $input['adjust-page-width'] );
+		}
+
     if ( isset( $input['darken-highlights'] ) ) {
       $new_input['darken-highlights'] = absint( $input['darken-highlights'] );
     }
-
 
     if ( isset( $input['hide-annotation-header'] ) ) {
 			$new_input['hide-annotation-header'] = absint( $input['hide-annotation-header'] );
@@ -134,10 +133,22 @@ class HypothesisModsSettingsPage {
   /**
    * Print the Display Settings section text
    */
-  public function display_section_info() {
+  public function print_section_info() {
   ?>
     <p><?php printf( 'Control additional Hypothesis display settings.'); ?></p>
   <?php }
+
+	/**
+	 * Callback for 'adjust-page-width'.
+	 */
+	public function adjust_page_width_callback ( $args ) {
+		$val = isset( $this->options['adjust-page-width'] ) ? esc_attr( $this->options['adjust-page-width'] ) : 0;
+
+		printf(
+			'<input type="checkbox" id="adjust-page-width" name="hypothesis_mods_options[adjust-page-width]" value="1" %s/>',
+			checked( $val, 1, false )
+		);
+	}
 
   /**
    * Callback for 'darken-highlights'.
@@ -163,17 +174,14 @@ class HypothesisModsSettingsPage {
   }
 }
 
-if ( is_admin() ) {
-	$hypothesis_mods_settings_page = new HypothesisModsSettingsPage();
-}
-
 /**
  * Calls script to resize page upon expansion of Hypothesis annotation pane
  */
 function adjust_page_width() {
-     wp_enqueue_script( 'hypothesis-demo', plugins_url('/js/demo.js', __FILE__), array('jquery'), false, true );
+ if ( isset ( $options['adjust-page-width'] ) ) {
+		 wp_enqueue_script( 'resize', plugins_url('/js/resize.js', __FILE__), array('jquery'), false, true );
   }
-
+}
   /**
    * Loads CSS which hides annotation header
    */
@@ -191,4 +199,8 @@ function darken_highlights() {
   if (isset ($options['darken_highlights'] ) ) {
     wp_enqueue_style( 'darken', plugins_url( 'css/darken.css', __FILE__) );
   }
+}
+
+if ( is_admin() ) {
+	$hypothesis_mods_settings_page = new HypothesisModsSettingsPage();
 }
