@@ -205,7 +205,7 @@ function hypothesis_modifications() {
 	/**
  	* Loads CSS which darkens annotations to make more visible
  	*/
-  if (isset ($options['darken_highlights'] ) ) {
+  if (isset ($options['darken-highlights'] ) ) {
 		$src = plugin_dir_url( __FILE__ ) .'css/darken.css';
 		wp_enqueue_style( 'darken', $src );
   }
