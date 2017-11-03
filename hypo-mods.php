@@ -189,7 +189,8 @@ function hypothesis_mods() {
  	* Calls script to resize page upon expansion of Hypothesis annotation pane
  	*/
  	if ( isset ( $options['adjust-page-width'] ) ) {
-		 wp_enqueue_script( 'resize', plugins_url('/js/resize.js', __FILE__), array('jquery'), false, true );
+		 $src = plugin_dir_url( __FILE__ ) .'js/resize.js';
+		 wp_enqueue_script( 'resize', $src, array('jquery'), false, true );
   }
 
 	/**
@@ -197,16 +198,17 @@ function hypothesis_mods() {
    */
   // display settings
   if ( isset( $options['hide-annotation-header'] ) ) {
-    wp_enqueue_style( 'hypo', plugins_url( '/css/hypo.css', __FILE__) );
+		$src = plugin_dir_url( __FILE__ ) .'css/hypo.css';
+		wp_enqueue_style( 'hypo', $src );
   }
 
 	/**
  	* Loads CSS which darkens annotations to make more visible
  	*/
   if (isset ($options['darken_highlights'] ) ) {
-    wp_enqueue_style( 'darken', plugins_url( 'css/darken.css', __FILE__) );
+		$src = plugin_dir_url( __FILE__ ) .'css/darken.css';
+		wp_enqueue_style( 'darken', $src );
   }
 }
 
 add_action( 'wp_enqueue_scripts', 'hypothesis_mods' );
-?>
