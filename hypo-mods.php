@@ -199,7 +199,7 @@ function hypothesis_modifications() {
   // display settings
   if ( isset( $options['hide-annotation-header'] ) ) {
 		$src = plugin_dir_url( __FILE__ ) .'css/hypo.css';
-		wp_enqueue_style( 'hypo', $src );
+		wp_enqueue_style( 'hypo', $src, 90 );
   }
 
 	/**
@@ -207,7 +207,7 @@ function hypothesis_modifications() {
  	*/
   if (isset ($options['darken-highlights'] ) ) {
 		$src = plugin_dir_url( __FILE__ ) .'css/darken.css';
-		wp_enqueue_style( 'darken', $src );
+		wp_enqueue_style( 'darken', $src, 91 );
   }
 }
 
