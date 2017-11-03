@@ -1,7 +1,10 @@
 window.hypothesisConfig = function () {
     return {
         onLayoutChange: function(layoutParams) {
-            jQuery('body').css({'padding-right':layoutParams.width});
+            if body.width() > 768 {
+            var width = body.width() - layoutParams.width;
+            jQuery('body').css({'width':$width});
+          }
         }
     };
 };
