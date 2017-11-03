@@ -177,7 +177,7 @@ class HypothesisModsSettingsPage {
 		$hypothesis_mods_settings_page = new HypothesisModsSettingsPage();
 	}
 
-function hypothesis_mods() {
+function hypothesis_modifications() {
 	$options = get_option( 'hypothesis_mods_options' );
 
 	if ( empty( $options ) ) :
@@ -211,4 +211,4 @@ function hypothesis_mods() {
   }
 }
 
-add_action( 'wp_enqueue_scripts', 'hypothesis_mods' );
+add_action( 'wp_enqueue_scripts', 'hypothesis_modifications' );
