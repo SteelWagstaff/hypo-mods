@@ -1,3 +1,14 @@
 .annotation-header {
   display: none;
 }
+
+.ic-app-main-content div#wrapper, .ic-app-main-content div#wrap div#content{
+    margin: 0;
+}
+
+.ic-app-main-content div#wrap div#content {
+  width: 95%;
+  max-width: 900px;
+  padding: 0 0 0 35px;
+  box-sizing: border-box;
+}

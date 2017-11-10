@@ -6,8 +6,6 @@
  * Author: Steel Wagstaff
  * Version: 0.1.0
  * Author URI: https://steelwagstaff.info
- * Text Domain:     hypothesis mods
- * Domain Path:     /languages
  */
 
 // Exit if called directly.
